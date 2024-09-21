@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+      integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <title>Let Var Const</title>
+    <style>
+      body {
+        height: 100vh;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 2.7rem;
+        background-color: rgba(207, 195, 195, 0.348);
+        align-items: center;
+      }
+      #div1,
+      #div2,
+      #div3,
+      #div4,
+      #div5,
+      #div6 {
+        width: 300px;
+        height: 72px;
+        padding: 10px;
+        background-color: whitesmoke;
+        display: flex;
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 3px 12px;
+        justify-content: space-between;
+        color: white;
+        border-radius: 3%;
+      }
+
+      span {
+        font-size: 2.1rem;
+      }
+      .scope {
+        width: 100%;
+
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+      }
+      .variable {
+        padding: 1rem;
+        display: flex;
+        gap: 1rem;
+
+        box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px,
+          rgba(0, 0, 0, 0.24) 0px 1px 2px;
+      }
+      .note {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        gap: 1rem;
+      }
+      .note button {
+        border: none;
+        border-radius: 12%;
+        padding: 0.3rem;
+        background-color: crimson;
+        color: white;
+        text-decoration: none;
+        outline: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="note">
+      <span style="font-size: 1.2rem; opacity: 0.6"
+        >How to use &nbsp; <i class="fa-solid fa-question"></i> &nbsp; Arrange
+        <b>Variable</b> with same <b>Color</b>
+      </span>
+
+      <a href="index.html"><button>Reset</button></a>
+    </div>
+    <div class="scope">
+      <div class="blockscope">
+        <h2 style="color: red">
+          Block Scope &nbsp; <i class="fa-solid fa-circle"></i>
+        </h2>
+        <div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+      </div>
+
+      <div class="globalscope">
+        <h2 style="color: blue">
+          Global Scope &nbsp; <i class="fa-solid fa-circle"></i>
+        </h2>
+        <div id="div2" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+      </div>
+
+      <div class="reassignable">
+        <h2 style="color: green">
+          Reassignable &nbsp; <i class="fa-solid fa-circle"></i>
+        </h2>
+        <div id="div3" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+      </div>
+
+      <div class="redeclarable">
+        <h2 style="color: darkmagenta">
+          Redeclarable &nbsp; <i class="fa-solid fa-circle"></i>
+        </h2>
+        <div id="div4" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+      </div>
+      <div class="redeclarable">
+        <h2 style="color: darkorange">
+          TDZ ( Temporal Dead Zone )&nbsp; <i class="fa-solid fa-circle"></i>
+        </h2>
+        <div id="div5" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+      </div>
+
+      <div class="function">
+        <h2 style="color: teal">
+          Function &nbsp; <i class="fa-solid fa-circle"></i>
+        </h2>
+        <div id="div6" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+      </div>
+    </div>
+
+    <div class="variable">
+      <!-- Conts -->
+      <span id="drag3" draggable="true" ondragstart="drag(event)"
+        ><b style="color: red">conts</b></span
+      >
+      <span id="drag4" draggable="true" ondragstart="drag(event)"
+        ><b style="color: darkorange">conts</b></span
+      >
+      <span id="drag9" draggable="true" ondragstart="drag(event)"
+        ><b style="color: teal">conts</b></span
+      >
+
+      <!-- Var -->
+      <span id="drag2" draggable="true" ondragstart="drag(event)"
+        ><b style="color: blue">var</b></span
+      >
+      <span id="drag5" draggable="true" ondragstart="drag(event)"
+        ><b style="color: green">var</b></span
+      >
+      <span id="drag6" draggable="true" ondragstart="drag(event)"
+        ><b style="color: darkmagenta">var</b></span
+      >
+      <span id="drag10" draggable="true" ondragstart="drag(event)"
+        ><b style="color: teal">var</b></span
+      >
+
+      <!-- Let -->
+      <span id="drag1" draggable="true" ondragstart="drag(event)"
+        ><b style="color: red">let</b></span
+      >
+      <span id="drag7" draggable="true" ondragstart="drag(event)"
+        ><b style="color: darkorange">let</b></span
+      >
+      <span id="drag8" draggable="true" ondragstart="drag(event)"
+        ><b style="color: green">let</b></span
+      >
+      <span id="drag11" draggable="true" ondragstart="drag(event)"
+        ><b style="color: teal">let</b></span
+      >
+    </div>
+
+    <script>
+      function allowDrop(ev) {
+        ev.preventDefault();
+      }
+
+      function drag(ev) {
+        ev.dataTransfer.setData("text", ev.target.id);
+      }
+
+      function drop(ev) {
+        ev.preventDefault();
+        var data = ev.dataTransfer.getData("text");
+        ev.target.appendChild(document.getElementById(data));
+      }
+    </script>
+  </body>
+</html>
